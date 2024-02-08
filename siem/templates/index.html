@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Logs</title>
+    <style>
+        /* Add your CSS styles here */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .pagination {
+            display: inline-block;
+        }
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gaurdians of The Binary SIEM</h1>
+    
+    <form action="/" method="GET">
+        <input type="text" name="search" placeholder="Search logs...">
+        <button type="submit">Search</button>
+    </form>
+    
+    <table>
+        <tr>
+            <th>Timestamp</th>
+            <th>Source IP</th>
+            <th>Protocol</th>
+            <th>Message</th>
+        </tr>
+        {% for log in logs %}
+        <tr>
+            <td>{{ log.timestamp }}</td>
+            <td>{{ log.hostname }}</td>
+            <td>{{ log.process }}</td>
+            <td>{{ log.message }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="pagination">
+        {% if page > 1 %}
+        <a href="/?page={{ page - 1 }}">&laquo; Prev</a>
+        {% endif %}
+        {% for p in range(1, total_pages + 1) %}
+            {% if p == page %}
+                <a class="active" href="#">{{ p }}</a>
+            {% else %}
+                <a href="/?page={{ p }}">{{ p }}</a>
+            {% endif %}
+        {% endfor %}
+        {% if page < total_pages %}
+        <a href="/?page={{ page + 1 }}">Next &raquo;</a>
+        {% endif %}
+    </div>
+
+</body>
+</html>
