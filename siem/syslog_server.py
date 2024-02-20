@@ -41,7 +41,7 @@ def parse_syslog_message(message):
     """
 
     # regular expression to match syslog message format
-    syslog_pattern = r'(?P<timestamp>^\w{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s(?P<source_ip>\S+)\s(?P<destination_ip>\S+):\s(?P<message>.*)$'
+    syslog_pattern = r'(?P<timestamp>^\w{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s(?P<source_ip>\S+)\s(?P<destination_ip>\S+)\s(?P<protocol>\S+):\s(?P<message>.*)$'
     
     match = re.match(syslog_pattern, message)
     if match:
@@ -58,7 +58,7 @@ def syslog_server (host, port):
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     
     # bind the socket to a host and port (NOT NEEDED)
-    # server_socket.bind((host, port))
+    server_socket.bind((host, port))
 
     print (f"Syslog server listening on {host} : {port}...")
 
