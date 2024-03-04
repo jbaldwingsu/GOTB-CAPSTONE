@@ -2,41 +2,103 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>System Logs</title>
-    <style>
-        /* Add your CSS styles here */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        .pagination {
-            display: inline-block;
-        }
-        .pagination a {
-            color: black;
-            float: left;
-            padding: 8px 16px;
-            text-decoration: none;
-        }
-        .pagination a.active {
-            background-color: #4CAF50;
-            color: white;
-        }
-        .pagination a:hover:not(.active) {
-            background-color: #ddd;
-        }
-    </style>
+   
 </head>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease forwards;
+    border-top: 4px solid #007bff; /* Style for top border */
+}
+
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+}
+form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+.pagination a {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 0 5px;
+}
+.pagination a.active {
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
+}
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+@media only screen and (max-width: 768px) {
+    .container {
+        width: 90%;
+        margin: 20px auto;
+    }
+
+    input[type="text"] {
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    input[type="text"] {
+        width: 50%;
+    }
+}
+</style>
 <body>
+    <div class="container">
     <h1>Gaurdians of The Binary SIEM</h1>
     
     <form action="/" method="GET">
@@ -45,22 +107,26 @@
     </form>
     
     <table>
-        <tr>
-            <th>Id</th>
-            <th>Timestamp</th>
-            <th>Source IP</th>
-            <th>Protocol</th>
-            <th>Message</th>
-        </tr>
-        {% for log in logs %}
-        <tr>
-            <td>{{log.id}}</td>
-            <td>{{ log.timestamp }}</td>
-            <td>{{ log.source_ip }}</td>
-            <td>{{ log.destination_ip }}</td>
-            <td>{{ log.message }}</td>
-        </tr>
-        {% endfor %}
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Timestamp</th>
+                <th>Source IP</th>
+                <th>Protocol</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+            <tr>
+                <td>{{ log.id }}</td>
+                <td>{{ log.timestamp }}</td>
+                <td>{{ log.source_ip }}</td>
+                <td>{{ log.destination_ip }}</td>
+                <td>{{ log.message }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
 
     <div class="pagination">
@@ -78,6 +144,9 @@
         <a href="/?page={{ page + 1 }}">Next &raquo;</a>
         {% endif %}
     </div>
+    </div>
 
-</body>
+</body>   
+ 
+
 </html>
