@@ -107,6 +107,7 @@ tr:nth-child(even) {
     </form>
     
     <table>
+<<<<<<< HEAD
         <thead>
             <tr>
                 <th>Id</th>
@@ -127,6 +128,38 @@ tr:nth-child(even) {
             </tr>
             {% endfor %}
         </tbody>
+=======
+        <tr>
+
+            <th>Timestamp</th>
+            <th>Source IP</th>
+            <th>Destination IP</th>
+            <th>Protocol</th>
+            <th>Message</th>
+        </tr>
+        {% for log in logs %}
+        <tr>
+
+            <td>{{ log['timestamp'] }}</td>
+            <td>{{ log['source_ip'] }}</td>
+            <td>{{ log['destination_ip'] }}</td>
+            <td>{{ log['protocol'] }}</td>
+            <td>{{ log['message'] }}</td>
+
+            <!-- <td>{{log.id}}</td>
+            <td>{{log.timestamp}}</td>
+            <td>{{log.source_ip}}</td>
+            <td>{{log.destination_ip}}</td>
+            <td>{{log.protocol}}</td>
+            <td>{{log.message}}</td> -->
+
+
+
+
+
+        </tr>
+        {% endfor %}
+>>>>>>> 384c83c4210a918d7334b4a4917a62c8dd35328f
     </table>
 
     <div class="pagination">
@@ -140,7 +173,7 @@ tr:nth-child(even) {
                 <a href="/?page={{ p }}">{{ p }}</a>
             {% endif %}
         {% endfor %}
-        {% if page < total_pages %}
+        {% if page >= total_pages %}
         <a href="/?page={{ page + 1 }}">Next &raquo;</a>
         {% endif %}
     </div>

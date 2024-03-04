@@ -8,29 +8,31 @@ app = Flask(__name__, template_folder='templates')
 # (COMMENT OUT EVERYTHING FROM UNDER TRY > ABOVE RETURN LOGS)
 def get_logs_from_db():
     try:
-        conn = sqlite3.connect('network_logs.db')
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM network_logs")
-        logs = cursor.fetchall()
-        conn.close()
+        # conn = sqlite3.connect('network_logs.db')
+        # cursor = conn.cursor()
+        # cursor.execute("SELECT * FROM network_logs")
+        # logs = cursor.fetchall()
+        # conn.close()
 
-        #(KEY) convert fetched logs from tuples to dictionaries 
-        keys = ['id', 'timestamp', 'source_ip', 'destination_ip', 'protocol', 'message']
-        logs = [dict(zip(keys, log)) for log in logs]
+        # #(KEY) convert fetched logs from tuples to dictionaries 
+        # keys = ['id', 'timestamp', 'source_ip', 'destination_ip', 'protocol', 'message']
+        # logs = [dict(zip(keys, log)) for log in logs]
 
         return logs
     except sqlite3.OperationalError as e:
         print("Error:", e)
         return []
 
-# app = Flask(__name__)
-# app = Flask(__name__, template_folder='templates')
-# logs = []
+app = Flask(__name__)             
+app = Flask(__name__, template_folder='templates') 
+logs = []
 
 # generate dummy logs for demo (USE TO SEE CORRECT VISUAL)
     # (start, n+1 end)
-# for i in range (1,101):
-#     logs.append({"timestamp": f"2024-02-06 12:00:0{i}", "hostname": f"host{i}.example.com", "process": "process", "message": f"Log message {i}"})
+for i in range (1,101):
+    logs.append({"timestamp": f"2024-03-03 12:00:0{i-1}", "source_ip": f"192.168.{i}.100", "destination_ip": f"8.{i}.8.8", "protocol": f"Protocol Template {i}", "message" : f"Message {i}"})
+
+# generate new dummy logs (mar 3)
 
 
 
@@ -40,8 +42,8 @@ def parse_syslog_message(message):
     Parse syslog messafe and extract relavent fields.
     """
 
-    # regular expression to match syslog message format
-    syslog_pattern = r'(?P<timestamp>^\w{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s(?P<source_ip>\S+)\s(?P<destination_ip>\S+):\s(?P<message>.*)$'
+    # regular expression to match syslog message format (LINKED WITH FOR LOOP DISPLAYING MOCK LOGS)
+    syslog_pattern = r'(?P<timestamp>^\w{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s(?P<source_ip>\S+)\s(?P<destination_ip>\S+)\s(?P<protocol>\S+):\s(?P<message>.*)$'
     
     match = re.match(syslog_pattern, message)
     if match:
@@ -58,7 +60,7 @@ def syslog_server (host, port):
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     
     # bind the socket to a host and port (NOT NEEDED)
-    # server_socket.bind((host, port))
+    server_socket.bind((host, port))
 
     print (f"Syslog server listening on {host} : {port}...")
 
@@ -69,13 +71,13 @@ def syslog_server (host, port):
             print(f"Recieved message from {address}: {message.decode('utf-8')}")
 
             # append syslog message to logs lists
-            logs.append(message.decode('utf-8'))
+            # logs.append(message.decode('utf-8'))
 
             parsed_data = parse_syslog_message(message.decode('utf-8'))
             if parsed_data:
                     print("Parsed syslog message:")
                     print(parsed_data)
-                    conn = sqlite.connect('network_logs.db')
+                    conn = sqlite3.connect('network_logs.db')
                     cursor = conn.cursor()
                     cursor.execute("INSERT INTO network_logs (timestamp, source_ip, destination_ip, protocol, message) VALUES (?, ?, ?, ?, ?)",
                                (parsed_data['timestamp'], parsed_data['source_ip'], parsed_data['destination_ip'], parsed_data['protocol'], parsed_data['message']))
