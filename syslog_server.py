@@ -29,7 +29,7 @@ def syslog_server (host, port):
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     
     # bind the socket to a host and port
-    server_socket.bind((host, port))
+    # server_socket.bind((host, port))
 
     print (f"Syslog server listening on {host} : {port}...")
 

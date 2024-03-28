@@ -2,26 +2,89 @@ from flask import Flask, render_template, request
 import socket
 import re
 import sqlite3
-
+import mysql.connector
+import random
 app = Flask(__name__, template_folder='templates')
 # function to fetch logs from SQLite DB 
 # (COMMENT OUT EVERYTHING FROM UNDER TRY > ABOVE RETURN LOGS)
+
+# Function to create the 'siem' database if it doesn't exist
+def create_database():
+    try:
+        # Connect to MySQL server without specifying a database
+        db_connection = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="thunderbear"
+        )
+
+        cursor = db_connection.cursor()
+
+        # Create the 'siem' database if it doesn't exist
+        cursor.execute("CREATE DATABASE IF NOT EXISTS siem")
+
+    except mysql.connector.Error as e:
+        print("Error:", e)
+
+    finally:
+        if 'db_connection' in locals() or 'db_connection' in globals():
+            db_connection.close()
+
+# Call the function to create the 'siem' database
+create_database()
+
 def get_logs_from_db():
     try:
-        # conn = sqlite3.connect('network_logs.db')
-        # cursor = conn.cursor()
-        # cursor.execute("SELECT * FROM network_logs")
-        # logs = cursor.fetchall()
-        # conn.close()
+        # Connect to the MySQL database
+        dataBase = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="thunderbear",
+            database="siem"
+        )
+        cursorObject = dataBase.cursor()
 
-        # #(KEY) convert fetched logs from tuples to dictionaries 
-        # keys = ['id', 'timestamp', 'source_ip', 'destination_ip', 'protocol', 'message']
-        # logs = [dict(zip(keys, log)) for log in logs]
+        # Create the network_logs table if it doesn't exist
+        cursorObject.execute("""
+            CREATE TABLE IF NOT EXISTS siem (
+                timestamp DATETIME,
+                source_ip VARCHAR(255),
+                destination_ip VARCHAR(255),
+                protocol VARCHAR(255),
+                message TEXT
+            )
+        """)
+        
+        # mock logs to test
+        # mock_logs = []
+        # for i in range(5):
+        #     timestamp = "2024-03-03 12:00:00"
+        #     source_ip = f"192.168.{i+1}.100"
+        #     destination_ip = f"8.{i+1}.8.8"
+        #     protocol = f"Protocol Template {i+1}"
+        #     message = f"Message {i+1}"
+
+        #     cursorObject.execute("INSERT INTO siem (timestamp, source_ip, destination_ip, protocol, message) VALUES (%s, %s, %s, %s, %s)",
+        #                         (timestamp, source_ip, destination_ip, protocol, message))
+        #     dataBase.commit()
+        #     mock_logs.append({"timestamp": timestamp, "source_ip": source_ip, "destination_ip": destination_ip, "protocol": protocol, "message": message})
+
+        # Fetch logs from the database
+        cursorObject.execute("SELECT * FROM siem")
+        rows = cursorObject.fetchall()
+
+        # Convert fetched logs from tuples to dictionaries
+        keys = ['timestamp', 'source_ip', 'destination_ip', 'protocol', 'message']
+        logs = [dict(zip(keys, row)) for row in rows]
 
         return logs
-    except sqlite3.OperationalError as e:
+
+    except mysql.connector.Error as e:
         print("Error:", e)
         return []
+    finally:
+        if 'dataBase' in locals() or 'dataBase' in globals():
+            dataBase.close()
 
 app = Flask(__name__)             
 app = Flask(__name__, template_folder='templates') 
@@ -29,11 +92,8 @@ logs = []
 
 # generate dummy logs for demo (USE TO SEE CORRECT VISUAL)
     # (start, n+1 end)
-for i in range (1,101):
-    logs.append({"timestamp": f"2024-03-03 12:00:0{i-1}", "source_ip": f"192.168.{i}.100", "destination_ip": f"8.{i}.8.8", "protocol": f"Protocol Template {i}", "message" : f"Message {i}"})
-
-# generate new dummy logs (mar 3)
-
+# for i in range (1,101):
+#     logs.append({"timestamp": f"2024-03-03 12:00:0{i-1}", "source_ip": f"192.168.{i}.100", "destination_ip": f"8.{i}.8.8", "protocol": f"Protocol Template {i}", "message" : f"Message {i}"})
 
 
 # implement log parsing (non-functional)
@@ -60,7 +120,7 @@ def syslog_server (host, port):
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     
     # bind the socket to a host and port (NOT NEEDED)
-    server_socket.bind((host, port))
+    # server_socket.bind((host, port))
 
     print (f"Syslog server listening on {host} : {port}...")
 
@@ -70,25 +130,38 @@ def syslog_server (host, port):
             message, address = server_socket.recvfrom(4096)
             print(f"Recieved message from {address}: {message.decode('utf-8')}")
 
-            # append syslog message to logs lists
-            # logs.append(message.decode('utf-8'))
-
             parsed_data = parse_syslog_message(message.decode('utf-8'))
             if parsed_data:
-                    print("Parsed syslog message:")
-                    print(parsed_data)
-                    conn = sqlite3.connect('network_logs.db')
-                    cursor = conn.cursor()
-                    cursor.execute("INSERT INTO network_logs (timestamp, source_ip, destination_ip, protocol, message) VALUES (?, ?, ?, ?, ?)",
-                               (parsed_data['timestamp'], parsed_data['source_ip'], parsed_data['destination_ip'], parsed_data['protocol'], parsed_data['message']))
-                    conn.commit()
-                    conn.close()
+                print("Parsed syslog message:")
+                print(parsed_data)
+                    
+                try:
+                    # connect to the mysql database
+                    dataBase = mysql.connector.connect(
+                        host="localhost",
+                        user="root",
+                        password="thunderbear",
+                        database="siem"
+                    )
+                    cursorObject = dataBase.cursor()
 
-            
+                    # insert parsed data into the siem table
+                    cursorObject.execute("""
+                        INSERT INTO siem (timestamp, source_ip, destination_ip, protocol, message)
+                        VALUES (%s, %s, %s, %s, %s)
+                    """, (parsed_data['timestamp'], parsed_data['source_ip'], parsed_data['destination_ip'], parsed_data['protocol'], parsed_data['message']))
+                    dataBase.commit()
+
+                except mysql.ConnectionError as e:
+                    print("Error:", e)
+                
+                finally: 
+                    if 'dataBase' in locals() or 'dataBase' in globals():
+                        dataBase.close()
+
             else:
                 print("Failed to parse syslog message:")
                 print(message.decode('utf-8'))
-
 
             # processing / forwarding logic -- add here 
 

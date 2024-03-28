@@ -6,8 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>System Logs</title>
    
+
+
 </head>
+
+
 <style>
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -96,10 +101,43 @@ tr:nth-child(even) {
         width: 50%;
     }
 }
+
+    /* New CSS styles for the motion panel */
+    .motion-panel {
+    /* Add styles for the motion panel container */
+    
+        margin-top: 20px;
+        background-color: #efefef;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+}
+
+    /* Add any additional styles for the marquee */
+    .motion-panel marquee {
+    /* Add styles for the marquee element */
+        font-size: 16px;
+        color: #333;
+        font-weight: bold;
+        padding: 20px;
+        border-radius: 50px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+    .motion-panel marqee:hover {
+        background-color: #0056b3; /* background color on hover*/
+        color: #fff; /* Change text color on hover */
+    }
+
 </style>
 <body>
     <div class="container">
-    <h1>Gaurdians of The Binary SIEM</h1>
+    
+    <a href = "/"> 
+        <h1>Gaurdians of The Binary SIEM</h1>
+    </a>
+
     
     <form action="/" method="GET">
         <input type="text" name="search" placeholder="Search logs...">
@@ -107,28 +145,6 @@ tr:nth-child(even) {
     </form>
     
     <table>
-<<<<<<< HEAD
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Timestamp</th>
-                <th>Source IP</th>
-                <th>Protocol</th>
-                <th>Message</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for log in logs %}
-            <tr>
-                <td>{{ log.id }}</td>
-                <td>{{ log.timestamp }}</td>
-                <td>{{ log.source_ip }}</td>
-                <td>{{ log.destination_ip }}</td>
-                <td>{{ log.message }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-=======
         <tr>
 
             <th>Timestamp</th>
@@ -153,18 +169,17 @@ tr:nth-child(even) {
             <td>{{log.protocol}}</td>
             <td>{{log.message}}</td> -->
 
-
-
-
-
         </tr>
         {% endfor %}
->>>>>>> 384c83c4210a918d7334b4a4917a62c8dd35328f
     </table>
 
     <div class="pagination">
         {% if page > 1 %}
-        <a href="/?page={{ page - 1 }}">&laquo; Prev</a>
+            <form action="/" method="GET" style="display: inline">
+                <input type="hidden" name="page" value="{{page -1 }}">
+                <button type="submit">&laquo; Prev</button>
+            </form>
+        
         {% endif %}
         {% for p in range(1, total_pages + 1) %}
             {% if p == page %}
@@ -173,13 +188,23 @@ tr:nth-child(even) {
                 <a href="/?page={{ p }}">{{ p }}</a>
             {% endif %}
         {% endfor %}
-        {% if page >= total_pages %}
-        <a href="/?page={{ page + 1 }}">Next &raquo;</a>
+        <!-- Add the "Next" button -->
+        {% if page < total_pages %}
+            <form action="/" method="GET" style="display: inline;">
+                <input type="hidden" name="page" value="{{ page + 1 }}">
+                <button type="submit">Next &raquo;</button>
+            </form>
         {% endif %}
     </div>
+</div>
+
+    <div class="motion-panel">
+        <marquee behavior="scroll" direction="left" scrollamount="5" onmouseover="this.stop()" onmouseout="this.start()">
+        </marquee>
     </div>
 
-</body>   
- 
+    <!-- link to javascript file making marquee slider -->
+    <script src = "motionpanel.js"></script>
 
+</body>  
 </html>
