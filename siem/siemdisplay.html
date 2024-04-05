@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIEM Display</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="logs-container">
+        <h1>Gaurdians of The Binary</h1>
+        <h2>SIEM Network Logs</h2>
+        <!-- Add scrollable container for the logs table -->
+        <div class="scrollable-container">
+            <div id="logs-container" class="logs-container">
+                <table id="logs">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Source IP</th>
+                            <th>Destination IP</th>
+                            <th>Protocol</th>
+                        </tr>
+                    </thead>
+                    <tbody id="logs-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- refresh button -->
+    <div class="refresh-button-container">
+        <button id="refresh-button" onclick="refreshPage()">Refresh Network Scanning</button>
+        <script src="refreshpage.js"></script>
+    </div>
+    
+    <!-- Placeholder for other components -->
+    <div class="container">
+        <h2>Placeholder 1</h2>
+        <p>Placeholder content for additional components or links.</p>
+    </div>
+    <div class="container">
+        <h2>Placeholder 2</h2>
+        <p>Placeholder content for additional components or links.</p>
+    </div>
+    <!-- add more space below the placeholders -->
+    <div style="margin-bottom: 30px;"></div>
+
+    <!-- Add more placeholders as needed -->
+    <script src="displaylogs.js"></script>
+</body>
+</html>
