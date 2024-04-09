@@ -1,0 +1,180 @@
+body {
+    font-family: monospace;
+    background-color: #fff;
+    color: #333; /* text color */
+}
+
+.logs-container {
+    max-width: 800 0;
+    max-height:max-content;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    font-size: 250%;
+}
+
+h2 {
+    color: #333;
+    text-align: center;
+    font-weight: lighter;
+    font-size: xx-large;
+}
+
+/* container class for placeholder at bototm */
+.container {
+    background-color: #f7f7f7; /* Placeholder background color */
+    border: 2px solid #ccc; /* Placeholder border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px;
+    margin-bottom: 20px; /* Add margin between containers */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+}
+
+/* Add styles for scrollable container */
+.scrollable-container {
+    max-height: 500px; /* Define max height for the scrollable container */
+    
+    overflow-y: auto; /* Enable vertical scrolling */
+    border: 5px solid #333; /* Add border */
+    border-radius: 10px; /* Rounded corners */
+    margin-bottom: 20px; /* Add margin between containers */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+}
+
+/* ensure the logs table fills container */
+#logs {
+    border-collapse: collapse;
+    width:100%;
+}
+
+/* ensure logs container fills scrollable contianer */
+#logs-container {
+    width: 100%;
+    height:100%;
+   
+}
+
+
+#logs th,
+#logs td {
+    border: 2px solid black; /* Added border */
+    padding: 8px;
+}
+
+#logs th {
+    background-color: #ccc; /* Header background color */
+}
+
+.log-entry:hover {
+    background-color: #c8c8c8;
+}
+
+.log-protocol {
+    color: #000000; /* Default color for protocol */
+    font-weight: bolder;
+    text-align: center;
+}
+
+/* Define specific colors for each protocol */
+.log-protocol.ICMP {
+    color: #ff6600; /* Orange for ICMP */
+}
+
+.log-protocol.TCP {
+    color: #007bff; /* Blue for TCP */
+}
+
+.log-protocol.UDP {
+    color: #dc3545; /* Red for UDP */
+}
+
+.log-destination {
+    font-weight: bolder;
+    text-align: center;
+}
+
+.log-source {
+    font-weight: bolder;
+    text-align: center;
+}
+
+.log-timestamp {
+    font-weight: bolder;
+    text-align: center;
+}
+
+/* space below placeholder objects */
+.container {
+    margin-bottom: 30px;
+}
+
+/* style for refresh button */
+.refresh-button-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#refresh-button {
+    background-color: #007bff; /* Blue background color */
+    color: #fff; /* White text color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Add padding */
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Add cursor pointer */
+    transition: all 0.3s ease; /* Smooth transition for all properties */
+    border-radius: 20px; /* Rounded corners */
+}
+
+/* Hover effect */
+#refresh-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: scale(1.10);
+}
+
+/* Container for the chart and heatmap */
+.container-wrapper {
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center items horizontally */
+    align-items: flex-start; /* Align items at the top */
+    flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
+}
+
+/* Container for individual chart and heatmap */
+.chart-container, #heatmap-container {
+    width: 45%; /* Set a fixed width for both containers */
+    margin: 0 10px; /* Add some space between containers */
+    padding: 20px;
+    margin-bottom: 25px;
+    overflow: hidden; /* Add overflow property to hide overflowing content */
+    border: 5px solid #333; /* Add border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+}
+
+.chart-container p, #heatmap-container p {
+    font-size: large;
+    text-align: center;
+}
+
+/* Pie chart and heatmap */
+#protocolChart, #heatmap {
+    width: 100%; /* Set the width to 100% */
+    max-height: 400px; /* Set maximum height to prevent excessive expansion */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+}
+
+/* pie chart and heatmap */
+#protocolChart, #heatmap {
+    width: 100%; /* Set the width to 100% */
+    max-height: 400px; /* Set maximum height to prevent excessive expansion */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+}
+
+
