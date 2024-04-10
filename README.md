@@ -1,4 +1,11 @@
 # GOTB-CAPSTONE
+
+Required Modules:
+* Node.js
+* Scapy
+* 
+
+
 How to use emailsummary.py:
 
 go to myaccount.google.com/apppasswords and generate a password code to be used with python API's

@@ -15,7 +15,7 @@ def packet_callback(packet):
     log_message = f"{timestamp}, {source_ip}, {destination_ip}, {protocol}\n"
 
     # Append the log message to a file
-    with open("network_log.txt", "a") as log_file:
+    with open("siem/network_log.txt", "a") as log_file:
         log_file.write(log_message)
 
 def main():
