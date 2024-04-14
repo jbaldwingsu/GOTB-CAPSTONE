@@ -21,3 +21,12 @@ In order for email alerts to function:
 After completing these steps, you will recieve alert emails if a packet contains a critical security risk, as well as a summary after every packet capture.
 
 Example: https://imgur.com/a/epIKZuR
+
+Terminal output:
+```
+Packet capture has started ... (Ctrl+C to stop)
+GOTB SIEM Alert email sent to wb02450@georgiasouthern.edu
+GOTB SIEM Alert email sent to wb02450@georgiasouthern.edu
+Packet capture has stopped.
+GOTB SIEM Summary Report email sent to wb02450@georgiasouthern.edu
+```
