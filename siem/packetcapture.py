@@ -12,10 +12,10 @@ def packet_callback(packet):
     protocols = {1: 'ICMP', 6: 'TCP', 17: 'UDP'}
     protocol = protocols.get(protocol_num, 'Unknown')
 
-    log_message = f"{timestamp} - Source: {source_ip}, Destination: {destination_ip}, Protocol: {protocol}\n"
+    log_message = f"{timestamp}, {source_ip}, {destination_ip}, {protocol}\n"
 
     # Append the log message to a file
-    with open("network_log.txt", "a") as log_file:
+    with open("siem/network_log.txt", "a") as log_file:
         log_file.write(log_message)
 
 def main():

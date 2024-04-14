@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIEM Display</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="logs-container">
+        <h1>Gaurdians of The Binary</h1>
+        <h2>SIEM Network Logs</h2>
+        <!-- Add scrollable container for the logs table -->
+        <div class="scrollable-container">
+            <div id="logs-container" class="logs-container">
+                <table id="logs">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Source IP</th>
+                            <th>Destination IP</th>
+                            <th>Protocol</th>
+                        </tr>
+                    </thead>
+                    <tbody id="logs-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Refresh button -->
+    <div class="refresh-button-container">
+        <button id="refresh-button" onclick="refreshPage()">Refresh Network Scanning</button>
+        <script src="refreshpage.js"></script>
+    </div>
+
+    <!-- container for chart and heatmap -->
+    <div class="container-wrapper">
+        <!-- Protocol Trend Pie Chart -->
+        <div class="chart-container" id="chart-container">
+            <h2>Protocol Trend</h2>
+            <p>Log Analysis Visual</p>
+            <canvas id="protocolChart"></canvas>
+        </div>
+    
+        <!-- Heatmap Display -->
+        <div class="chart-container" id="heatmap-container">
+            <h2>Anomaly Heatmap</h2>
+            <p>Visual Diagram of Featured Activity</p>
+            <!-- Add a button to trigger the data capture process -->
+            <script src="heatmapdisplay.js"></script>
+            <!-- <script src="heatmapfunction.js"></script> -->
+
+            <button id="capture-data-btn" onclick="captureData()">Capture Data</button>
+            <div id="heatmap"></div>
+        </div>
+    </div>
+
+    <!-- Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Link log analysis and display logs scripts -->
+    <script src="loganalysis.js"></script>
+    <script src="displaylogs.js"></script>
+
+  
+
+    <!-- Add more space below the placeholders -->
+    <div style="margin-bottom: 30px;"></div>
+
+    <!-- additional script for heatmap functionality -->
+    
+    <script src="heatmapfunction.js"></script>
+</body>
+</html>
