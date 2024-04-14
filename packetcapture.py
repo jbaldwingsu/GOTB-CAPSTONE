@@ -1,7 +1,28 @@
 import scapy.all as scapy
 import datetime
-import subprocess
 import os
+import dotenv
+from emailnotifications import EmailNotifications
+
+# Load .env file for email credentials
+dotenv.load_dotenv()
+
+# Create an instance of EmailNotifications
+sender = os.getenv('SENDER')
+recipients = [os.getenv('RECIPIENT')]
+password = os.getenv('API_KEY')
+email_notifications = EmailNotifications(sender, recipients, password)
+
+# Function to check if a packet contains a critical security risk
+def is_critical_security_risk(packet):
+    # Check if the packet contains a suspicious string
+    if packet.haslayer(scapy.Raw):
+        load = packet[scapy.Raw].load
+        keywords = ["password", "login", "user", "username", "pass", "key"]
+        for keyword in keywords:
+            if keyword.encode() in load:
+                return True
+    return False
 
 def packet_callback(packet):
     # Log packet details (customize as needed)
@@ -17,8 +38,12 @@ def packet_callback(packet):
     log_message = f"{timestamp} -  {source_ip},  {destination_ip}, : {protocol}\n"
 
     # Append the log message to a file
-    with open("siem/network_log.txt", "a") as log_file:
+    with open("network_log.txt", "a") as log_file:
         log_file.write(log_message)
+    
+    # Check for critical security risk
+    if is_critical_security_risk(packet):
+        email_notifications.send_alert("A critical security risk was detected in a network packet.")
 
 # Creating a summary to be used for an email notification
 def generate_summary():
@@ -42,10 +67,10 @@ def main():
         # If an error occurs while sniffing, print the error
         print(f"Error: {e}")
     finally:
-        # Run emailsummary.py after packet capture terminates
-        script_dir = os.path.dirname(os.path.realpath(__file__))
-        email_script_path = os.path.join(script_dir, 'emailsummary.py')
-        subprocess.run(["python", email_script_path])
+        # Generate a summary and send an email notification
+        print("Packet capture has stopped.")
+        summary = generate_summary()
+        email_notifications.send_summary(summary)
 
 if __name__ == "__main__":
     main()

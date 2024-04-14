@@ -1,5 +1,7 @@
 # GOTB-CAPSTONE
 
+pip install python-dotenv
+
 How to use emailsummary.py:
 
 1. go to myaccount.google.com/apppasswords and generate a password code to be used with python API's
