@@ -177,3 +177,17 @@ h2 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow effect */
 }
 
+/* port - scanner */
+#port-scan-container {
+    width: 100%; /* Set width to 100% */
+    margin: 20px auto; /* Add margin */
+    padding: 20px;
+    border: 5px solid #333; /* Add border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+}
+
+#port-scan-results {
+    font-family: monospace; /* Use monospace font */
+    font-size: 1.2em; /* Adjust font size */
+}

@@ -34,7 +34,7 @@
         <script src="refreshpage.js"></script>
     </div>
 
-    <!-- container for chart and heatmap -->
+    <!-- container for all charts -->
     <div class="container-wrapper">
         <!-- Protocol Trend Pie Chart -->
         <div class="chart-container" id="chart-container">
@@ -43,17 +43,16 @@
             <canvas id="protocolChart"></canvas>
         </div>
     
-        <!-- Heatmap Display -->
-        <div class="chart-container" id="heatmap-container">
-            <h2>Anomaly Heatmap</h2>
-            <p>Visual Diagram of Featured Activity</p>
-            <!-- Add a button to trigger the data capture process -->
-            <script src="heatmapdisplay.js"></script>
-            <!-- <script src="heatmapfunction.js"></script> -->
+        <div class="chart-container" id="port-scan-container">
+            <h2>Port Scanning Results</h2>
+            <p>Used scans for open ports on network devices and identifies potential vulnerabilities</p>
 
-            <button id="capture-data-btn" onclick="captureData()">Capture Data</button>
-            <div id="heatmap"></div>
-        </div>
+                <button id="port-scan-btn">Scan Ports</button>
+                <!-- Container to display port scanning results -->
+                <div id="port-scan-results"></div>
+    
+            <script src="portscan.js"></script>
+
     </div>
 
     <!-- Chart.js library -->
