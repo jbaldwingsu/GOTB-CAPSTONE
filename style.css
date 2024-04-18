@@ -146,7 +146,7 @@ h2 {
 }
 
 /* Container for individual chart and heatmap */
-.chart-container, #heatmap-container {
+.chart-container {
     width: 45%; /* Set a fixed width for both containers */
     margin: 0 10px; /* Add some space between containers */
     padding: 20px;
@@ -154,32 +154,32 @@ h2 {
     overflow: hidden; /* Add overflow property to hide overflowing content */
     border: 5px solid #333; /* Add border */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow effect */
-}
-
-.chart-container p, #heatmap-container p {
     font-size: large;
     text-align: center;
+
 }
 
-/* Pie chart and heatmap */
-#protocolChart, #heatmap {
+
+#pie-chart-container{
+    text-align: center; /* Center align content */
+    margin: 20px auto; /* Add margin */
+    padding: 20px;
+    border: 5px solid #333; /* Add border */
+    border-radius: 10px; /* Rounded corners */
+    
+}
+
+/* pie chart and  */
+#protocolChart {
     width: 100%; /* Set the width to 100% */
     max-height: 400px; /* Set maximum height to prevent excessive expansion */
     border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow effect */
-}
-
-/* pie chart and heatmap */
-#protocolChart, #heatmap {
-    width: 100%; /* Set the width to 100% */
-    max-height: 400px; /* Set maximum height to prevent excessive expansion */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+    
 }
 
 /* port - scanner */
 #port-scan-container {
-    width: 100%; /* Set width to 100% */
+    text-align: center; /* Center align content */
     margin: 20px auto; /* Add margin */
     padding: 20px;
     border: 5px solid #333; /* Add border */
@@ -187,7 +187,85 @@ h2 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow effect */
 }
 
+#target-host,
+#target-ports {
+    width: calc(50% - 10px); /* Set width for input fields */
+    margin-right: 10px; /* Add margin between fields */
+    position: fixed 0;
+    padding: 15px;
+    margin-bottom: 10px; /* Add margin below input fields */
+    border: 2px solid #333;
+    border-radius: 5px;
+    font-family: monospace;
+    font-size: 16px;
+    text-align: center;
+}
+#target-ports {
+    margin-right: 0;
+}
+
+#port-scan-btn {
+    width: 200px; /* Set button width */
+    margin-top: 10px; /* Add margin above the button */
+    padding: 10px 20px;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+}
+
+
+#port-scan-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: scale(1.10);
+}
+
 #port-scan-results {
     font-family: monospace; /* Use monospace font */
+    font-size:x-large; /* Adjust font size */
+    font-weight: bold; /* Make the text bold */
+    color: red; /* Set text color to red */
+}
+
+/* Add styles for threat detection section */
+#threat-container {
+    text-align: center; /* Center align content */
+    margin: 20px auto; /* Add margin */
+    padding: 20px;
+    border: 5px solid #333; /* Add border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+}
+
+#threat-detect-btn {
+    width: 200px; /* Set button width */
+    margin-top: 10px; /* Add margin */
+    padding: 10px 20px;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+}
+
+#threat-detect-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: scale(1.05); /* Slight scale on hover */
+}
+
+
+#threat-detection-results {
+    font-family: monospace; /* Use monospace font */
     font-size: 1.2em; /* Adjust font size */
+    font-weight: bold; /* Make the text bold */
+    color: red; /* Set text color to red */
 }

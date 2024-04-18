@@ -9,8 +9,27 @@ const server = http.createServer((req, res) => {
     const contentType = getContentType(filePath);
 
     // Check if the request is for the port scan endpoint
-    if (req.url === '/run_port_scan' && req.method === 'GET') {
-        executePortScan(res);
+    if (req.url === '/run_port_scan' && req.method === 'POST') {
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk.toString(); // Convert Buffer to string
+        });
+        req.on('end', () => {
+            const { targetHost, targetPorts } = JSON.parse(body);
+            executePortScan(res, targetHost, targetPorts);
+        });
+    } else if (req.url === '/detect_threats' && req.method === 'POST') {
+        // Handle the threat detection endpoint
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk.toString(); // Convert Buffer to string
+        });
+        req.on('end', () => {
+            // Placeholder for threat detection logic
+            const threatDetectionResults = "Placeholder: Threats detected!";
+            res.writeHead(200, { 'Content-Type': 'text/plain' });
+            res.end(threatDetectionResults);
+        });
     } else {
         // Read the requested file
         fs.readFile(filePath, (err, data) => {
@@ -57,8 +76,8 @@ function getContentType(filePath) {
 }
 
 // Function to execute the Python script
-function executePortScan(res) {
-    const pythonProcess = spawn('python', ['port_scanner.py']);
+function executePortScan(res, targetHost, targetPorts) {
+    const pythonProcess = spawn('python', ['portscanner.py', targetHost, targetPorts]);
 
     pythonProcess.stdout.on('data', (data) => {
         console.log(`stdout: ${data}`);
