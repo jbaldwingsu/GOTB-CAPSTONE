@@ -2,6 +2,32 @@ body {
     font-family: monospace;
     background-color: #fff;
     color: #333; /* text color */
+    margin: 0; /* Remove default body margin */
+    padding: 0; /* Remove default body padding */
+    text-align: center;
+}
+
+.sticky-header {
+    position: sticky;
+    top: 0;
+    
+    z-index: 1000;
+    padding: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+}
+
+.logo-img {
+    /* max-width: 45%; Set maximum width */
+    width: 40%;
+    height: auto; /* Let the height adjust proportionally based on the width */
+    margin: 0 auto; /* Center the image horizontally */
+    display: block;
+}
+
+.header {
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
 .logs-container {
@@ -36,12 +62,12 @@ h2 {
 
 /* Add styles for scrollable container */
 .scrollable-container {
+    /* padding-top: 80px; */
     max-height: 500px; /* Define max height for the scrollable container */
-    
     overflow-y: auto; /* Enable vertical scrolling */
     border: 5px solid #333; /* Add border */
     border-radius: 10px; /* Rounded corners */
-    margin-bottom: 20px; /* Add margin between containers */
+    margin-bottom: 10px; /* Add margin between containers */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow effect */
 }
 
@@ -81,7 +107,7 @@ h2 {
 
 /* Define specific colors for each protocol */
 .log-protocol.ICMP {
-    color: #ff6600; /* Orange for ICMP */
+    color: #00af3a; /* Green for ICMP */
 }
 
 .log-protocol.TCP {
@@ -119,7 +145,7 @@ h2 {
 }
 
 #refresh-button {
-    background-color: #007bff; /* Blue background color */
+    background-color: #1e6658; /* Blue background color */
     color: #fff; /* White text color */
     border: none; /* Remove border */
     padding: 10px 20px; /* Add padding */
@@ -133,7 +159,7 @@ h2 {
 
 /* Hover effect */
 #refresh-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #32aa93; /* Darker blue on hover */
     transform: scale(1.10);
 }
 
@@ -169,10 +195,10 @@ h2 {
     
 }
 
-/* pie chart and  */
+/* pie chart itself (inside container) */
 #protocolChart {
     width: 100%; /* Set the width to 100% */
-    max-height: 400px; /* Set maximum height to prevent excessive expansion */
+    max-height: 350px; /* Set maximum height to prevent excessive expansion */
     border-radius: 10px; /* Rounded corners */
     
 }
@@ -187,6 +213,7 @@ h2 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow effect */
 }
 
+/* input fields */
 #target-host,
 #target-ports {
     width: calc(50% - 10px); /* Set width for input fields */
@@ -214,33 +241,34 @@ h2 {
     cursor: pointer;
     transition: all 0.3s ease;
     border-radius: 20px;
-    background-color: #007bff;
+    background-color: #1e6658;
     color: #fff;
     border: none;
 }
 
-
 #port-scan-btn:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #32aa93; /* Darker blue on hover */
     transform: scale(1.10);
 }
 
 #port-scan-results {
     font-family: monospace; /* Use monospace font */
-    font-size:x-large; /* Adjust font size */
-    font-weight: bold; /* Make the text bold */
+    font-size:large; /* Adjust font size */
+    font-weight:800; /* Make the text bold */
     color: red; /* Set text color to red */
 }
 
 /* Add styles for threat detection section */
 #threat-container {
     text-align: center; /* Center align content */
-    margin: 20px auto; /* Add margin */
+    margin: 20px auto 80px; /* Add extra margin at the bottom */
     padding: 20px;
     border: 5px solid #333; /* Add border */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow effect */
 }
+
+
 
 #threat-detect-btn {
     width: 200px; /* Set button width */
@@ -252,13 +280,13 @@ h2 {
     cursor: pointer;
     transition: all 0.3s ease;
     border-radius: 20px;
-    background-color: #007bff;
+    background-color: #1e6658;
     color: #fff;
     border: none;
 }
 
 #threat-detect-btn:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #32aa93; /* Darker blue on hover */
     transform: scale(1.05); /* Slight scale on hover */
 }
 
@@ -268,4 +296,24 @@ h2 {
     font-size: 1.2em; /* Adjust font size */
     font-weight: bold; /* Make the text bold */
     color: red; /* Set text color to red */
+}
+
+/* Footer styles */
+footer {
+    background-color: #333; /* Light grey footer */
+    color: #ccc; /* Dark grey text */
+    text-align: center;
+    font-family: monospace;
+    font-size: medium;
+    padding: 2px;
+    font-weight: bold;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 999; /* Ensure footer stays on top of other content */
+}
+
+.creator {
+    font-weight: bold; /* Make text bold */
+    color: #ccc;
 }

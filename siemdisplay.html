@@ -4,29 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIEM Display</title>
+    <title>Guardians Of The Binary</title>
     <link rel="stylesheet" href="style.css">
+    
 </head>
 
 <body>
-    <div class="logs-container">
-        <h1>Gaurdians of The Binary</h1>
+    <img src="images/gotb-logo.png" class="logo-img"> 
+    <h2> The Secrutiy Information & Event Management System</h2>
+    <!-- <h1>Gaurdians of The Binary</h1> -->
+    <!-- <h2 class="header">SIEM Network Logs</h2> -->
+    <!-- Add scrollable container for the logs table -->
+    <div class="scrollable-container">
         <h2>SIEM Network Logs</h2>
-        <!-- Add scrollable container for the logs table -->
-        <div class="scrollable-container">
-            <div id="logs-container" class="logs-container">
-                <table id="logs">
-                    <thead>
-                        <tr>
-                            <th>Timestamp</th>
-                            <th>Source IP</th>
-                            <th>Destination IP</th>
-                            <th>Protocol</th>
-                        </tr>
-                    </thead>
-                    <tbody id="logs-body"></tbody>
-                </table>
-            </div>
+        <div id="logs-container" class="logs-container">
+            <table id="logs">
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Source IP</th>
+                        <th>Destination IP</th>
+                        <th>Protocol</th>
+                    </tr>
+                </thead>
+                <tbody id="logs-body"></tbody>
+            </table>
         </div>
     </div>
 
@@ -63,7 +65,7 @@
 
             <br>
             <!-- button to trigger the port scan -->
-            <button id="port-scan-btn">Click To Scan Ports</button>
+            <button id="port-scan-btn">Click For Port Activity</button>
             
 
             <!-- Script for port scanning functionality -->
@@ -71,8 +73,9 @@
 
             <!-- Container to display port scanning results -->
             <div id="port-scan-results"></div>
+            
 
-            <!-- Loading Spinner Image -->
+            <!-- Loading Gif Image -->
             <div id="loading-spinner" class="loading-spinner">
                 <img src="images/runningman3.gif" alt="Loading..." width="150" height="150" />
             </div>
@@ -98,9 +101,10 @@
         <script src="threatdetection.js"></script>
     </div>
 
-    
-
-
+    <footer>
+        <p> Creators: Jordan Baldwin, Reese Schumacher, Osiris Corker, & Will Bohlke.</p>
+    </footer>
 </body>
+
 
 </html>

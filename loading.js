@@ -1,4 +1,4 @@
-// Function to show the loading spinner
+// Function to show the loading spinner / handle loading for Port Scanner Function
 function showLoadingSpinner() {
     document.getElementById('loading-spinner').style.display = 'block';
 }
