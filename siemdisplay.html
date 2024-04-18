@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIEM Display</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="logs-container">
         <h1>Gaurdians of The Binary</h1>
@@ -34,42 +36,71 @@
         <script src="refreshpage.js"></script>
     </div>
 
-    <!-- container for chart and heatmap -->
+    <!-- Universial Chart Container -->
     <div class="container-wrapper">
+
         <!-- Protocol Trend Pie Chart -->
-        <div class="chart-container" id="chart-container">
+        <div class="chart-container" id="pie-chart-container">
             <h2>Protocol Trend</h2>
             <p>Log Analysis Visual</p>
             <canvas id="protocolChart"></canvas>
         </div>
-    
-        <!-- Heatmap Display -->
-        <div class="chart-container" id="heatmap-container">
-            <h2>Anomaly Heatmap</h2>
-            <p>Visual Diagram of Featured Activity</p>
-            <!-- Add a button to trigger the data capture process -->
-            <script src="heatmapdisplay.js"></script>
-            <!-- <script src="heatmapfunction.js"></script> -->
 
-            <button id="capture-data-btn" onclick="captureData()">Capture Data</button>
-            <div id="heatmap"></div>
+        <!-- Chart.js library -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <!-- Link log analysis and display logs scripts -->
+        <script src="loganalysis.js"></script>
+        <script src="displaylogs.js"></script>
+
+        <!-- Port Scan Input -->
+        <div class="chart-container" id="port-scan-container">
+            <h2>Port Scanning Results</h2>
+            <p>Enter the target host/IP address and ports to scan:</p>
+            <!-- input fields -->
+            <input type="text" id="target-host" placeholder="Enter target host/IP address">
+            <input type="text" id="target-ports" placeholder="Enter ports to scan (comma-separated)">
+
+            <br>
+            <!-- button to trigger the port scan -->
+            <button id="port-scan-btn">Click To Scan Ports</button>
+            
+
+            <!-- Script for port scanning functionality -->
+            <script src="portscan.js"></script>
+
+            <!-- Container to display port scanning results -->
+            <div id="port-scan-results"></div>
+
+            <!-- Loading Spinner Image -->
+            <div id="loading-spinner" class="loading-spinner">
+                <img src="images/runningman3.gif" alt="Loading..." width="150" height="150" />
+            </div>
+            <!-- <script src="loading.js"></script> -->
+            
+
         </div>
+
+
+        <!-- Threat Detection -->
+        <div class="chart-container" id="threat-container">
+            <h2>Threat Detection</h2>
+            <p>Threat Intelligence Integration</p>
+
+            <!-- Add a button to trigger threat detection -->
+            <button id="threat-detect-btn">Detect Threats</button>
+
+            <!-- Container to display threat detection results -->
+            <div id="threat-detection-results"></div>
+        </div>
+
+        <!-- Include the threat detection script -->
+        <script src="threatdetection.js"></script>
     </div>
 
-    <!-- Chart.js library -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- Link log analysis and display logs scripts -->
-    <script src="loganalysis.js"></script>
-    <script src="displaylogs.js"></script>
-
-  
-
-    <!-- Add more space below the placeholders -->
-    <div style="margin-bottom: 30px;"></div>
-
-    <!-- additional script for heatmap functionality -->
     
-    <script src="heatmapfunction.js"></script>
+
+
 </body>
+
 </html>

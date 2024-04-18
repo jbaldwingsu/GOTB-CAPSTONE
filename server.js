@@ -1,4 +1,3 @@
-// server.js
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
@@ -9,9 +8,28 @@ const server = http.createServer((req, res) => {
     const filePath = req.url === '/' ? 'siemdisplay.html' : req.url.slice(1); // Remove leading '/'
     const contentType = getContentType(filePath);
 
-    // Check if the request is for the script execution endpoint
-    if (req.url === '/run_python_script' && req.method === 'GET') {
-        executePythonScript(res);
+    // Check if the request is for the port scan endpoint
+    if (req.url === '/run_port_scan' && req.method === 'POST') {
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk.toString(); // Convert Buffer to string
+        });
+        req.on('end', () => {
+            const { targetHost, targetPorts } = JSON.parse(body);
+            executePortScan(res, targetHost, targetPorts);
+        });
+    } else if (req.url === '/detect_threats' && req.method === 'POST') {
+        // Handle the threat detection endpoint
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk.toString(); // Convert Buffer to string
+        });
+        req.on('end', () => {
+            // Placeholder for threat detection logic
+            const threatDetectionResults = "Placeholder: Threats detected!";
+            res.writeHead(200, { 'Content-Type': 'text/plain' });
+            res.end(threatDetectionResults);
+        });
     } else {
         // Read the requested file
         fs.readFile(filePath, (err, data) => {
@@ -58,27 +76,23 @@ function getContentType(filePath) {
 }
 
 // Function to execute the Python script
-function executePythonScript(res) {
-    const pythonProcess = spawn('python', ['heatmapcapture.py']);
+function executePortScan(res, targetHost, targetPorts) {
+    const pythonProcess = spawn('python', ['portscanner.py', targetHost, targetPorts]);
 
     pythonProcess.stdout.on('data', (data) => {
         console.log(`stdout: ${data}`);
+        // Send the port scanning results to the client
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
+        res.end(data);
     });
 
     pythonProcess.stderr.on('data', (data) => {
         console.error(`stderr: ${data}`);
         res.writeHead(500);
-        res.end('Error executing Python script');
+        res.end('Error executing port scanning script');
     });
 
     pythonProcess.on('close', (code) => {
         console.log(`child process exited with code ${code}`);
-        if (code === 0) {
-            res.writeHead(200);
-            res.end('Python script executed successfully');
-        } else {
-            res.writeHead(500);
-            res.end('Error executing Python script');
-        }
     });
 }
