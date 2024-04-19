@@ -1,0 +1,189 @@
+commit f52321dcb9b3efe7d050dafda74ba04a6caff28d
+Author: jbaldwingsu <jb56462@georgiasouthern.edu>
+Date:   Thu Apr 18 19:11:09 2024 -0400
+
+    Stylization & Minor Functions Fixed
+    
+    Added GOTB logo & updated some changes with display coloring etc.
+
+commit bb1d4274ee5899b1a86476fd22a2b764e360c858
+Author: jbaldwingsu <jb56462@georgiasouthern.edu>
+Date:   Thu Apr 18 14:30:57 2024 -0400
+
+    Port Scan Fully Functional
+    
+    More testing to it & more ports to scan for (optional) great progress.
+
+commit 0beb28eed88009dae638b0c62dfb3d7ca99b9af8
+Author: jbaldwingsu <jb56462@georgiasouthern.edu>
+Date:   Tue Apr 16 16:30:17 2024 -0400
+
+    Replace Heatmap with Port Scan
+    
+    more features being added tonight, table of options sent in discord
+
+commit 630bf2f3bdf850a74c35e1cf11bfe3519bd33a53
+Merge: c8b5265 0065729
+Author: Will Bohlke <willbohlke@gmail.com>
+Date:   Tue Apr 16 15:26:49 2024 -0400
+
+    Merge pull request #6 from jbaldwingsu/wills-branch
+    
+    Wills branch
+
+commit 00657291cb241b09746e8d70a1b1247f08a1c464
+Author: Will Bohlke <willbohlke@gmail.com>
+Date:   Sun Apr 14 00:31:55 2024 -0400
+
+    updated readme
+
+commit 48ca96ad5059c9609988e0cdc7be06dbe94ef8e7
+Author: Will Bohlke <willbohlke@gmail.com>
+Date:   Sun Apr 14 00:14:52 2024 -0400
+
+    updated readme
+
+commit 2646f3d7ec102a6163442bf458c647aaccd007a3
+Author: Will Bohlke <willbohlke@gmail.com>
+Date:   Sat Apr 13 23:45:45 2024 -0400
+
+    update
+
+commit f7bd9e8116e06f7dfc40a2fa8db643ed7a856310
+Merge: 8119191 ae95e3b
+Author: Will Bohlke <willbohlke@gmail.com>
+Date:   Sat Apr 13 22:17:36 2024 -0400
+
+    Merge branch 'wills-branch' of https://github.com/jbaldwingsu/GOTB-CAPSTONE into wills-branch
+
+commit 8119191ec3c1db310b0a17a6bce908811231e918
+Merge: 417aa79 c8b5265
+Author: Will Bohlke <willbohlke@gmail.com>
+Date:   Sat Apr 13 22:14:11 2024 -0400
+
+    Merge branch 'main' of https://github.com/jbaldwingsu/GOTB-CAPSTONE into wills-branch
+
+commit c8b526501d0ea120089c8ac3cdbd3d38607b9dfc
+Author: willbohlke <19395211+willbohlke@users.noreply.github.com>
+Date:   Wed Apr 10 16:04:04 2024 -0400
+
+    changed log folder write location
+
+commit 73d2f8c3d8386111742b18a8a2a331bf38e626ad
+Author: jbaldwingsu <jb56462@georgiasouthern.edu>
+Date:   Wed Apr 10 15:38:11 2024 -0400
+
+    Update with Pie Chart + Heatmap
+    
+    run by
+    node server.js
+    then python packetcapture.py for packet sniffs
+
+commit 27d61c49b91ecf3ae6397c08fee360e4eebce849
+Author: willbohlke <19395211+willbohlke@users.noreply.github.com>
+Date:   Wed Apr 10 15:27:39 2024 -0400
+
+    added gitignore file
+
+commit ae95e3b71deb0a308791d05bccfd6931bd6ec852
+Author: willbohlke <19395211+willbohlke@users.noreply.github.com>
+Date:   Wed Apr 10 15:22:50 2024 -0400
+
+    added .gitignore file so it won't upload the pycache folder
+
+commit 00f6cc728cdfcf9d7bb7465a82761f3881279cd0
+Author: jbaldwingsu <jb56462@georgiasouthern.edu>
+Date:   Tue Apr 9 15:33:27 2024 -0400
+
+    email updated
+
+commit 744dbb6a129d23f3281a3c6157f349520c6c953c
+Author: Will Bohlke <willbohlke@gmail.com>
+Date:   Sun Apr 7 14:47:25 2024 -0400
+
+    added email notification summary functionality
+
+commit f0c628b0af4fd3ba25a9262859c1dfbcea3e2e48
+Merge: d32a017 417aa79
+Author: Will Bohlke <willbohlke@gmail.com>
+Date:   Sun Apr 7 14:46:54 2024 -0400
+
+    Merge branch 'wills-branch' of https://github.com/jbaldwingsu/GOTB-CAPSTONE into wills-branch
+
+commit d32a0174532975f436e54755e345d0d447db7ba2
+Author: jbaldwingsu <jb56462@georgiasouthern.edu>
+Date:   Fri Apr 5 12:59:12 2024 -0400
+
+    April Update GOTB
+    
+    Site working when launched
+    display of packets captured
+    color codded protocols
+    placeholders for SIEM management functions
+
+commit 6b5e3b3494d2382e658a097c71742e5b9fdb8858
+Author: jbaldwingsu <jb56462@georgiasouthern.edu>
+Date:   Thu Apr 4 16:01:49 2024 -0400
+
+    Deleted Unused Files
+
+commit 417aa790870ff2c8ff53a9c85d55282c84ae5e33
+Author: willbohlke <19395211+willbohlke@users.noreply.github.com>
+Date:   Thu Mar 28 17:23:50 2024 -0400
+
+    sniffs packets for an IP and generates a log file called network_log.txt
+
+commit 20af1bd2049b85605fa34ea61423dba6eb75885e
+Merge: 303b386 384c83c
+Author: Osiris Corker <96017072+Osiris34@users.noreply.github.com>
+Date:   Sun Mar 3 22:34:45 2024 -0500
+
+    Merge branch 'main' of https://github.com/jbaldwingsu/GOTB-CAPSTONE
+
+commit 303b386f5631efcbff088e14acdc9db3cf188a4b
+Author: Osiris Corker <96017072+Osiris34@users.noreply.github.com>
+Date:   Sun Mar 3 22:32:36 2024 -0500
+
+    Updated UI
+
+commit 384c83c4210a918d7334b4a4917a62c8dd35328f
+Author: jbaldwingsu <jb56462@georgiasouthern.edu>
+Date:   Sun Mar 3 21:22:35 2024 -0500
+
+    Mock Logs Displayed
+
+commit f17e89241045dcc75923fdd3adc1cdcd259bf1d1
+Author: jbaldwingsu <jb56462@georgiasouthern.edu>
+Date:   Tue Feb 20 15:18:50 2024 -0500
+
+    HTML Corrections (Display Issue Still)
+
+commit d7b3f965235d1bf6d1dcee4cb7832a8edf35d36f
+Author: jbaldwingsu <jb56462@georgiasouthern.edu>
+Date:   Thu Feb 8 16:33:10 2024 -0500
+
+    Blank Tabs FIXED!
+    
+    Only issue now is page is not displaying all database entries on page (problem with pagination section)
+
+commit 0137f2538607677d0e93dabad2634fbc44721d92
+Author: Jordan Baldwin <150172847+jbaldwingsu@users.noreply.github.com>
+Date:   Thu Feb 8 15:27:41 2024 -0500
+
+    Most recent code
+    
+    (Is working)
+
+commit 2cd7a903b199e576c26b581cfcad0206da5ed198
+Author: Jordan Baldwin <150172847+jbaldwingsu@users.noreply.github.com>
+Date:   Tue Feb 6 16:40:45 2024 -0500
+
+    Supporting Files Via GPT
+    
+    The one I got the furthest on was syslog_server.py, the other 2 are works in progress, in an attempt to visualize network traffic/activity.
+
+commit 8e242d1b7087394a81e4dce38948f4e1363cd2d2
+Author: Jordan Baldwin <150172847+jbaldwingsu@users.noreply.github.com>
+Date:   Thu Jan 25 13:37:59 2024 -0500
+
+    Initial commit
