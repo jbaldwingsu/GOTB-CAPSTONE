@@ -11,16 +11,14 @@ const server = http.createServer((req, res) => {
     const contentType = getContentType(filePath);
 
     if (req.url === '/run_packet_capture' && req.method === 'POST') {
+        // Start the packet capture
         packetcap = spawn('python3', ['packetcapture.py']);
-        packetcap.stdout.on('data', (data) => {
-            console.log(`stdout: ${data}`);
-        });
-        packetcap.stderr.on('data', (data) => {
-            console.error(`stderr: ${data}`);
-        });
-        packetcap.on('close', (code) => {
-            console.log(`child process exited with code ${code}`);
-        });
+        res.end();
+    } else if (req.url === '/terminate_packet_capture' && req.method === 'POST') {
+        // Terminate the packet capture
+        if (packetcap) { // Check if packetcap is defined before calling kill on it
+            packetcap.kill();
+        }
         res.end();
     } else if (req.url === '/run_port_scan' && req.method === 'POST') {
         let body = '';
@@ -43,10 +41,6 @@ const server = http.createServer((req, res) => {
             res.writeHead(200, { 'Content-Type': 'text/plain' });
             res.end(threatDetectionResults);
         });
-    } else if (req.url === '/terminate_packet_capture' && req.method === 'POST') {
-        // Handle the terminate packet capture endpoint
-        packetcap.kill();
-        res.end();
     } else {
         // Read the requested file
         fs.readFile(filePath, (err, data) => {
@@ -113,3 +107,7 @@ function executePortScan(res, targetHost, targetPorts) {
         console.log(`child process exited with code ${code}`);
     });
 }
+
+process.on('exit', () => {
+    packetcap.kill();
+});

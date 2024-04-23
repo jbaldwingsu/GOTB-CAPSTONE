@@ -5,14 +5,16 @@ import dotenv
 from emailnotifications import EmailNotifications
 import signal
 import sys
+import logging
 
-def handle_sigterm(signal, frame):
-    # Code to send the email goes here
-    summary = generate_summary()
-    email_notifications.send_summary(summary)
+# Define a signal handler
+def signal_handler(sig, frame):
+    print('Stopping...')
     sys.exit(0)
 
-signal.signal(signal.SIGTERM, handle_sigterm)
+# Register the signal handler for SIGINT and SIGTERM
+signal.signal(signal.SIGINT, signal_handler)
+signal.signal(signal.SIGTERM, signal_handler)
 
 # Rest of your code...
 
@@ -108,6 +110,7 @@ def generate_summary():
 
 def main():
     print("Packet capture has started ... (Ctrl+C to stop)")
+    log_file = open("network_log.txt", "a")  # Define the log_file variable
     try:
         # Start sniffing the network
         scapy.sniff(filter="ip", prn=packet_callback)
@@ -116,9 +119,10 @@ def main():
         print(f"Error: {e}")
     finally:
         # Generate a summary and send an email notification
-        print("Packet capture has stopped.")
+        print("\nPacket capture has stopped.")
         summary = generate_summary()
         email_notifications.send_summary(summary)
+        log_file.close()
 
 if __name__ == "__main__":
     main()
