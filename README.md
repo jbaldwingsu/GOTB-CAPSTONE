@@ -11,12 +11,11 @@ pip install python-dotenv
 ```
 
 ## To Run Program
-** 2 methods to run program (concurrently preffered for seamless demo)
-    1. Concurrently - python3 packetcapture.py & node server.js
+** Simple to run
+While in the 'GOTB-CAPSTONE' directory simply run:
+    'node server.js' in your command prompt to launch the localhost:3000 server and operate the GOTB-SIEM
+    Using control/cmd + click the http://localhost:3000/ link you will be take to our main page
 
-    2. Individually - run 'node server.js' in a terminal window
-        In a separate window, to begin sniffing packets run:
-        'python3 packetcapture.py'
 
 
 ## In order for email alerts to function:
