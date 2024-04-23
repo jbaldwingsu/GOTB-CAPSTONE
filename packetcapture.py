@@ -43,7 +43,21 @@ def packet_callback(packet):
     
     # Check for critical security risk
     if is_critical_security_risk(packet):
-        email_notifications.send_alert("A critical security risk was detected in a network packet.")
+        rmessage = """
+        <html>
+        <head></head>
+        <body>
+            <p>Urgent,</p>
+            <p>This is an automated message from the Guardians of the Binary SIEM: </p>
+            <ul>
+                <li>Our System detected a suspicous a packet. Please act now.</li>
+            </ul>
+            <p>Best regards,</p>
+            <p>GOTB</p>
+        </body>
+        </html>
+        """
+        email_notifications.send_alert(rmessage)
 
 # Creating a summary to be used for an email notification
 def generate_summary():
@@ -55,7 +69,25 @@ def generate_summary():
     udp_packets = sum('UDP' in log for log in logs)
     icmp_packets = sum('ICMP' in log for log in logs)
 
-    summary = f"Total packets: {total_packets}\nTCP packets: {tcp_packets}\nUDP packets: {udp_packets}\nICMP packets: {icmp_packets}"
+    # summary = f"Total packets: {total_packets}\nTCP packets: {tcp_packets}\nUDP packets: {udp_packets}\nICMP packets: {icmp_packets}"
+
+    summary = f"""
+    <html>
+    <head></head>
+    <body>
+        <p>Hello,</p>
+        <p>This is an automated Summary Report from the Guardians of the Binary SIEM:</p>
+        <ul>
+            <li>"Total packets: {total_packets}</li>
+            <li>TCP packets: {tcp_packets}</li>
+            <li>UDP packets: {udp_packets}</li>
+            <li>ICMP packets: {icmp_packets}</li>
+        </ul>
+        <p>Best regards,</p>
+        <p>GOTB</p>
+    </body>
+    </html>
+    """
     return summary
 
 def main():

@@ -20,13 +20,13 @@ class EmailNotifications:
         self.send_email(subject, body)
 
     def send_email(self, subject, body):
-        msg = MIMEText(body)
+        msg = MIMEText(body, 'html')  # Specify that the body is HTML
         msg['Subject'] = subject
         msg['From'] = self.sender
         msg['To'] = ', '.join(self.recipients)
         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp_server:
             smtp_server.login(self.sender, self.password)
-            smtp_server.sendmail(self.sender, self.recipients, msg.as_string())
+            smtp_server.send_message(msg)
         print(f"{subject} email sent to {msg['To']}")
 
 # Usage:
