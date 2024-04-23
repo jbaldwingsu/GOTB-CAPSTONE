@@ -16,7 +16,7 @@ class EmailNotifications:
 
     def send_alert(self, body):
         subject = "GOTB SIEM Alert"
-        body = "An alert has been triggered by the SIEM system.\n"
+        #body = "An alert has been triggered by the SIEM system.\n"
         self.send_email(subject, body)
 
     def send_email(self, subject, body):

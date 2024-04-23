@@ -145,7 +145,7 @@ h2 {
 }
 
 #refresh-button {
-    background-color: #1e6658; /* Blue background color */
+    background-color: skyblue; /* Blue background color */
     color: #fff; /* White text color */
     border: none; /* Remove border */
     padding: 10px 20px; /* Add padding */
@@ -159,7 +159,7 @@ h2 {
 
 /* Hover effect */
 #refresh-button:hover {
-    background-color: #32aa93; /* Darker blue on hover */
+    background-color: blue; /* Darker blue on hover */
     transform: scale(1.10);
 }
 

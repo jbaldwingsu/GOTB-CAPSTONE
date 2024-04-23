@@ -41,6 +41,7 @@
             fetch('/run_packet_capture', { method: 'POST' });
         });
         </script> -->
+        <button id="startButton">Start Packet Capture</button>
         
         <button id="refresh-button" onclick="refreshPage()">Refresh Network Scanning</button>
         <script src="refreshpage.js"></script>
@@ -48,9 +49,27 @@
         <button id="terminateButton">Terminate Packet Capture</button>
 
         <script>
-        document.getElementById('terminateButton').addEventListener('click', function() {
-            fetch('/terminate_packet_capture', { method: 'POST' });
+        
+        document.getElementById('startButton').addEventListener('click', function() {
+            fetch('/run_packet_capture', { method: 'POST' })
+            .then(() => {
+                document.getElementById('startButton').disabled = true; // Disable the start button after starting
+                document.getElementById('startButton').innerText = "Packet Capture Started"; // Change the start button text
+                document.getElementById('terminateButton').disabled = false; // Enable the terminate button
+            })
+            .catch(error => console.error('Error starting packet capture:', error));
         });
+
+        document.getElementById('terminateButton').addEventListener('click', function() {
+            fetch('/terminate_packet_capture', { method: 'POST' }) // Assuming you have a /terminate_packet_capture endpoint
+            .then(() => {
+                document.getElementById('startButton').disabled = false; // Enable the start button after stopping
+                document.getElementById('startButton').innerText = "Start Packet Capture"; // Change the start button text back
+                document.getElementById('terminateButton').disabled = true; // Disable the terminate button
+            })
+            .catch(error => console.error('Error stopping packet capture:', error));
+        });
+
         </script>
     </div>
 

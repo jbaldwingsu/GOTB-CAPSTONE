@@ -1,15 +1,14 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const { spawn } = require('child_process');
+//const { spawn } = require('child_process');
+const spawn = require('child_process').spawn;
+let packetcap //= spawn('python3', ['packetcapture.py']);
 
 const server = http.createServer((req, res) => {
     // Determine the requested file path
     const filePath = req.url === '/' ? 'siemdisplay.html' : req.url.slice(1); // Remove leading '/'
     const contentType = getContentType(filePath);
-
-    const spawn = require('child_process').spawn;
-    let packetcap = spawn('python3', ['packetcapture.py']);
 
     if (req.url === '/run_packet_capture' && req.method === 'POST') {
         packetcap = spawn('python3', ['packetcapture.py']);
@@ -46,7 +45,7 @@ const server = http.createServer((req, res) => {
         });
     } else if (req.url === '/terminate_packet_capture' && req.method === 'POST') {
         // Handle the terminate packet capture endpoint
-        packetcap.kill('SIGTERM');
+        packetcap.kill();
         res.end();
     } else {
         // Read the requested file

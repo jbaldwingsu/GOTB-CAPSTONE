@@ -3,6 +3,18 @@ import datetime
 import os
 import dotenv
 from emailnotifications import EmailNotifications
+import signal
+import sys
+
+def handle_sigterm(signal, frame):
+    # Code to send the email goes here
+    summary = generate_summary()
+    email_notifications.send_summary(summary)
+    sys.exit(0)
+
+signal.signal(signal.SIGTERM, handle_sigterm)
+
+# Rest of your code...
 
 # Load .env file for email credentials
 dotenv.load_dotenv()
@@ -12,15 +24,18 @@ sender = os.getenv('SENDER')
 recipients = [os.getenv('RECIPIENT')]
 password = os.getenv('API_KEY')
 email_notifications = EmailNotifications(sender, recipients, password)
+crit_count = 0
 
 # Function to check if a packet contains a critical security risk
 def is_critical_security_risk(packet):
+    global crit_count
     # Check if the packet contains a suspicious string
     if packet.haslayer(scapy.Raw):
         load = packet[scapy.Raw].load
         keywords = ["password", "login", "user", "username", "pass", "key"]
         for keyword in keywords:
             if keyword.encode() in load:
+                crit_count += 1
                 return True
     return False
 
@@ -78,10 +93,11 @@ def generate_summary():
         <p>Hello,</p>
         <p>This is an automated Summary Report from the Guardians of the Binary SIEM:</p>
         <ul>
-            <li>"Total packets: {total_packets}</li>
+            <li>Total packets: {total_packets}</li>
             <li>TCP packets: {tcp_packets}</li>
             <li>UDP packets: {udp_packets}</li>
             <li>ICMP packets: {icmp_packets}</li>
+            <li>Suspicious packets: {crit_count}</li>
         </ul>
         <p>Best regards,</p>
         <p>GOTB</p>
