@@ -2,6 +2,7 @@
 
 // function to capture counts of protocols in packetcapture.py
 function analyzeLogs(logs) {
+    console.log('Received logs:', logs);
     let protocolCounts = {
         ICMP: 0,
         TCP: 0,
@@ -38,6 +39,7 @@ function analyzeLogs(logs) {
                 protocolCounts.Other++;
         }
     });
+    console.log('Updated protocol counts:', protocolCounts);
     return protocolCounts;
 }
 

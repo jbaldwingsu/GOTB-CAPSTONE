@@ -8,8 +8,22 @@ const server = http.createServer((req, res) => {
     const filePath = req.url === '/' ? 'siemdisplay.html' : req.url.slice(1); // Remove leading '/'
     const contentType = getContentType(filePath);
 
-    // Check if the request is for the port scan endpoint
-    if (req.url === '/run_port_scan' && req.method === 'POST') {
+    const spawn = require('child_process').spawn;
+    let packetcap = spawn('python3', ['packetcapture.py']);
+
+    if (req.url === '/run_packet_capture' && req.method === 'POST') {
+        packetcap = spawn('python3', ['packetcapture.py']);
+        packetcap.stdout.on('data', (data) => {
+            console.log(`stdout: ${data}`);
+        });
+        packetcap.stderr.on('data', (data) => {
+            console.error(`stderr: ${data}`);
+        });
+        packetcap.on('close', (code) => {
+            console.log(`child process exited with code ${code}`);
+        });
+        res.end();
+    } else if (req.url === '/run_port_scan' && req.method === 'POST') {
         let body = '';
         req.on('data', chunk => {
             body += chunk.toString(); // Convert Buffer to string
@@ -26,10 +40,14 @@ const server = http.createServer((req, res) => {
         });
         req.on('end', () => {
             // Placeholder for threat detection logic
-            const threatDetectionResults = "Placeholder: Threats detected!";
+            const threatDetectionResults = "Threat(s) Detected! Check logs for more information.";
             res.writeHead(200, { 'Content-Type': 'text/plain' });
             res.end(threatDetectionResults);
         });
+    } else if (req.url === '/terminate_packet_capture' && req.method === 'POST') {
+        // Handle the terminate packet capture endpoint
+        packetcap.kill('SIGTERM');
+        res.end();
     } else {
         // Read the requested file
         fs.readFile(filePath, (err, data) => {

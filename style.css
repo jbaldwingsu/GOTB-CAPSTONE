@@ -163,6 +163,44 @@ h2 {
     transform: scale(1.10);
 }
 
+#terminateButton {
+    background-color: #dc3545; /* Red background color */
+    color: #fff; /* White text color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Add padding */
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Add cursor pointer */
+    transition: all 0.3s ease; /* Smooth transition for all properties */
+    border-radius: 20px; /* Rounded corners */
+}
+
+/* Hover effect */
+#terminateButton:hover {
+    background-color: #ff4d6d; /* Darker red on hover */
+    transform: scale(1.10);
+}
+
+#startButton {
+    background-color: #1e6658; /* Blue background color */
+    color: #fff; /* White text color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Add padding */
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Add cursor pointer */
+    transition: all 0.3s ease; /* Smooth transition for all properties */
+    border-radius: 20px; /* Rounded corners */
+}
+
+/* Hover effect */
+#startButton:hover {
+    background-color: #32aa93; /* Darker blue on hover */
+    transform: scale(1.10);
+}
+
 /* Container for the chart and heatmap */
 .container-wrapper {
     display: flex; /* Use flexbox */

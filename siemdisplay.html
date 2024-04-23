@@ -34,8 +34,24 @@
 
     <!-- Refresh button -->
     <div class="refresh-button-container">
+        <!-- <button id="startButton">Start Packet Capture</button>
+
+        <script>
+        document.getElementById('startButton').addEventListener('click', function() {
+            fetch('/run_packet_capture', { method: 'POST' });
+        });
+        </script> -->
+        
         <button id="refresh-button" onclick="refreshPage()">Refresh Network Scanning</button>
         <script src="refreshpage.js"></script>
+
+        <button id="terminateButton">Terminate Packet Capture</button>
+
+        <script>
+        document.getElementById('terminateButton').addEventListener('click', function() {
+            fetch('/terminate_packet_capture', { method: 'POST' });
+        });
+        </script>
     </div>
 
     <!-- Universial Chart Container -->
